@@ -1,0 +1,9 @@
+{
+    "name" : "sweng-github-graph",
+    "version": "1.0.0",
+    "main" : "github-info.js",
+    "repository" : "npm/npm",
+    "dependencies": {
+        "express": "^4.16.2"
+    }
+}
