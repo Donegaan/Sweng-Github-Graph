@@ -4,7 +4,18 @@
 //alert("Test alert"); // To test if I have lnked the html file and the javascript file correctly
 const express = require('express'); 
 var passport = require('passport'); // For the user authentication
+var github = require('octonode'); // Github api library from: https://github.com/pksunkara/octonode
 //var fs = require('fs'); // File system for serving html page
+
+
+
+
+// {
+//   username: 'donegaan',
+//   password: 'password'
+// });
+
+var client = github.client('9238a976959a933e171c2d937fa017b85216d9e0'); // This is my access token, its email read only
 
 // Create our Express application
 const app = express();
@@ -20,7 +31,10 @@ var port = process.env.PORT || 3000;
 // Initial dummy route for testing
 // http://localhost:3000
 app.get('/', (req, res)=> {
-    res.render('homePage');
+  client.get('/user', {}, function (err, status, body, headers) {
+    res.send(JSON.stringify(body, null, 4));
+    //res.render('homePage');
+  });
 });
 
 
