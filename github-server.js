@@ -1,7 +1,10 @@
 //Initial code from http://scottksmith.com/blog/2014/05/02/building-restful-apis-with-node/
 
 // Get the packages we need, using express package, documentation: https://www.npmjs.com/package/express-package
+//alert("Test alert"); // To test if I have lnked the html file and the javascript file correctly
 var express = require('express'); 
+var passport = require('passport'); // For the user authentication
+var fs = require('fs'); // File system for serving html page
 
 // Create our Express application
 var app = express();
@@ -13,14 +16,16 @@ var port = process.env.PORT || 3000;
 var router = express.Router();
 
 // Initial dummy route for testing
-// http://localhost:3000/api
-router.get('/', function(req, res) {
-  res.json({ message: 'You are running dangerously low on beer!' });
+// http://localhost:3000
+router.get('', function(req, res) {
+  res.writeHead(200, {'Content-Type' :'text/html'});
+  var readStream = fs.createReadStream(__dirname+'/github-info.html'); // Display html file on webpage
+  readStream.pipe(res);
 });
 
 // Register all our routes with /api
-app.use('/api', router);
+app.use('', router);
 
 // Start the server
 app.listen(port);
-console.log('Insert beer on port ' + port);
+console.log('Starting localhost on port ' + port);

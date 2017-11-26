@@ -1,9 +1,12 @@
 {
-    "name" : "sweng-github-graph",
+    "name": "sweng-github-graph",
     "version": "1.0.0",
-    "main" : "github-info.js",
-    "repository" : "npm/npm",
+    "main": "github-info.js",
+    "license": "TCD",
+    "repository": "npm/npm",
     "dependencies": {
-        "express": "^4.16.2"
+        "express": "^4.16.2",
+        "passport": "^0.4.0",
+        "passport-github": "^1.1.0"
     }
 }
