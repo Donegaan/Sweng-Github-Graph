@@ -1,10 +1,11 @@
 {
     "name": "sweng-github-graph",
     "version": "1.0.0",
-    "main": "github-info.js",
-    "license": "TCD",
+    "main": "github-server.js",
+    "license": "MIT",
     "repository": "npm/npm",
     "dependencies": {
+        "ejs": "^2.5.7",
         "express": "^4.16.2",
         "passport": "^0.4.0",
         "passport-github": "^1.1.0"
