@@ -1,10 +1,8 @@
 //Initial code from http://scottksmith.com/blog/2014/05/02/building-restful-apis-with-node/
 
 // Get the packages we need, using express package, documentation: https://www.npmjs.com/package/express-package
-//alert("Test alert"); // To test if I have lnked the html file and the javascript file correctly
 const express = require('express'); 
-var github = require('octonode'); // Github api library from: https://github.com/pksunkara/octonode
-//var fs = require('fs'); // File system for serving html page
+var github = require('octonode'); // Github api library from: https://github.com/pksunkara/octonod
 
 
 var client = github.client(); // This is my access token, its email read only
@@ -17,7 +15,7 @@ app.set('view engine','ejs');
 // Use environment defined port or 3000
 var port = process.env.PORT || 3000;
 
-function jsonFormat(body){
+function jsonFormat(body){ // To display JSON data clearly
   //var str = JSON.stringify(body);
   var formatStr = 'Username: ' + body.login
   +'<br> ID: ' + body.id
@@ -34,7 +32,7 @@ app.get('/', (req, res)=> {
   client.get('/users/donegaan', {}, function (err, status, body, headers) {
     var str = jsonFormat(body);
     res.send(str);
-    console.log(body);
+    //console.log(body);
     //res.render('homePage');
   });
 });
