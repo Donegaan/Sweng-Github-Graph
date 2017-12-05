@@ -3,6 +3,7 @@
 // Get the packages we need, using express package, documentation: https://www.npmjs.com/package/express-package
 const express = require('express'); 
 var github = require('octonode'); // Github api library from: https://github.com/pksunkara/octonod
+const flJson = require('./flare.json');
 
 
 var client = github.client(); // This is my access token, its email read only
@@ -30,13 +31,16 @@ function jsonFormat(body){ // To display JSON data clearly
 // http://localhost:3000/
 app.get('/', (req, res)=> {
   client.get('/users/donegaan', {}, function (err, status, body, headers) {
-    var str = jsonFormat(body);
-    res.send(str);
+    // var str = jsonFormat(body);
+    // res.send(str);
     //console.log(body);
-    //res.render('homePage');
+    res.render('graph');
   });
 });
 
+app.get('/flare.json', (req, res)=> {
+    res.send(flJson);
+});
 // Start the server
 app.listen(port, ()=>{
   console.log('Listening to port ' + port);
