@@ -5,6 +5,7 @@ const express = require('express');
 var github = require('octonode'); // Github api library from: https://github.com/pksunkara/octonod
 var request = require('request');
 const flJson = require('./flare.json');
+var fetch = require('node-fetch');
 
 var client = github.client();
 client.requestDefaults['proxy'] = 'https://myproxy.com:1085'// For the request library
@@ -27,8 +28,8 @@ function callback(err, data, headers) {
   console.log("headers:" + headers);
 }
 
-function jsonFormat(body){ // To display JSON data clearly
-  //var str = JSON.stringify(body);
+
+function modifyJson(body){ // Make functions to modify JSON data to work for graph
   var formatStr = 'Username: ' + body.login
   +'<br> ID: ' + body.id
   +'<br> URL: ' + body.url
@@ -38,17 +39,22 @@ function jsonFormat(body){ // To display JSON data clearly
   return formatStr;
 }
 
-// Initial dummy route for testing
 // http://localhost:3000/
 app.get('/', (req, res)=> {
   //client.get('/users/donegaan', {}, function (err, status, body, headers) {
-    // var str = jsonFormat(body);
-    //res.send(body);
-    res.send(ghOrg.members(callback));
-    //console.log(body);
+    //res.send(ghOrg.members(callback));
     //res.render('graph');
   //})
+  fetch('https://api.github.com/orgs/facebook') // Fetch to get Facebook information
+  .then(function(res) {
+      return res.json();
+  }).then(function(json) {
+      var str = modifyJson(json);
+      res.send(str);
+  });
 });
+
+
 // Get the json file to populate the graph
 app.get('/flare.json', (req, res)=> {
     res.send(flJson);
