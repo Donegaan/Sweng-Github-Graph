@@ -4,7 +4,6 @@
 const express = require('express'); 
 var github = require('octonode'); // Github api library from: https://github.com/pksunkara/octonod
 var request = require('request');
-const flJson = require('./flare.json');
 var fetch = require('node-fetch');
 var path = require('path');
 
@@ -23,11 +22,11 @@ app.set('view engine','ejs');
 // Use environment defined port or 3000
 var port = process.env.PORT || 3000;
 
-function callback(err, data, headers) {
-  console.log("error: " + err);
-  console.log("data: " + data);
-  console.log("headers:" + headers);
-}
+// function callback(err, data, headers) {
+//   console.log("error: " + err);
+//   console.log("data: " + data);
+//   console.log("headers:" + headers);
+// }
 
 
 // function modifyJson(body){ // Make functions to modify JSON data to work for graph
@@ -40,21 +39,20 @@ function callback(err, data, headers) {
 //   return formatStr;
 // }
 
-function jsonGraph(data){
-  var str =new Array();
+function jsonFormat(data){
 
   var keys= Object.keys(data[0]);
+  var x=keys.map(k=>({id: 'facebook.'+k,value:""}));
+  x.push({id:'facebook', values:""});
   for(var i=0;i<data.length;i++){
     var tmp=data[i];
-  for (var j=0 ;j<keys.length;j++){
+    for (var j=0 ;j<keys.length;j++){
       var test=tmp[keys[j]];
-      //console.log(test);
-      var tempdata = { id: 'facebook.'+tmp[keys[j]].toString().replace(/\./g, "*") , value : 0};
-      str.push(tempdata);
-  }
-  //console.log(str);
-}
-  return str;
+      var tempdata = { id: 'facebook.'+keys[j]+'.'+tmp[keys[j]].toString().replace(/\./g, "*") , value : ((j*i)+j)};
+      x.push(tempdata);
+    }
+  } 
+  return x;
 }
 
 // http://localhost:3000/
@@ -77,10 +75,8 @@ app.get('/', (req, res)=> {
   //  });
 });
 
-
-// Get the json file to populate the graph
-app.get('/flare.json', (req, res)=> {
-    res.send(flJson);
+app.get('/graph.json', (req, res)=> { // Display the JSON data through the graph
+    res.send(JSON.stringify(jsonFormat(data)));
 });
 
 app.use(express.static('public'));
