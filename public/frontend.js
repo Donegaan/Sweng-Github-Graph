@@ -1,10 +1,19 @@
 
+ function getUserInfo(){
+    fetch('/home.html')
+    .then(function(res){
+        return res.text();
+    }).then(function(str){
+        res.send(str);
+    });  
+}
 
 function getInfo(){
-    fetch('/graph.json') // Fetch to get Facebook information
+    fetch('/displayGraph') // Fetch to get Facebook information
     .then(function(res) {
         return res.text();
     }).then(function(json) {
+        console.log(json);
         displayGraph(JSON.parse(json));
     });
 }

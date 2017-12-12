@@ -7,6 +7,15 @@
     
     <!-- Style code from https://github.com/iamshaunjp/oauth-playlist/blob/lesson-5/views/home.ejs -->
     <style>
+        .button{
+            color: #fff;
+            font-size: 18px;
+            background: rgba(255,255,255,0.2);
+            text-decoration: none;
+            padding: 10px;
+            display: inline;
+            border: none;
+        }
         body{
             font-family: arial;
             margin: 0;
@@ -25,14 +34,14 @@
             display: inline-block;
             margin: 0 10px 0 0;
         }
-        nav a{
+        /* nav a{
             color: #fff;
             font-size: 18px;
             background: rgba(255,255,255,0.2);
             text-decoration: none;
             padding: 10px;
             display: block;
-        }
+        } */
         main, header{
             max-width: 960px;
             margin: 30px auto;
@@ -66,19 +75,22 @@
 
     <nav>
         <ul>
-            <li><a href="/" onclick="dosomething()"> Home</a></li>
-            <button onclick="getInfo()">Click to display Graph</button>
+            <button class="button" onclick="getUserInfo()">Home</button>
+            <button class="button" onclick="getInfo()">Display Graph</button>
         </ul>
     </nav>
     <header>
         <h1>Software Engineer Github API Interrogator</h1>
     </header>
+    <!-- <script type="text/javascript">
+        //  document.getElementById('str').innerHTML = str;
+    </script> -->
     <pre id ="json"></pre>
     
    
     
 </body>
-<svg width="1300" height="2100"></svg>
+<svg width="1300" height="5000"></svg>
 <script src="frontend.js"></script>
 <script src="//d3js.org/d3.v4.min.js"></script>
 </html>
