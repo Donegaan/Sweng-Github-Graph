@@ -1,96 +1,21 @@
 <!DOCTYPE html>
 <html>
-
-<head>
     <meta charset="utf-8">
     <title>Sweng Github Interrogator</title>
-    
-    <!-- Style code from https://github.com/iamshaunjp/oauth-playlist/blob/lesson-5/views/home.ejs -->
-    <style>
-        .button{
-            color: #fff;
-            font-size: 18px;
-            background: rgba(255,255,255,0.2);
-            text-decoration: none;
-            padding: 10px;
-            display: inline;
-            border: none;
-        }
-        body{
-            font-family: arial;
-            margin: 0;
-        }
-        nav{
-            background: #ff5353;
-            padding: 20px 10px;
-        }
-        nav ul{
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0;
-        }
-        nav li{
-            list-style-type: none;
-            display: inline-block;
-            margin: 0 10px 0 0;
-        }
-        /* nav a{
-            color: #fff;
-            font-size: 18px;
-            background: rgba(255,255,255,0.2);
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-        } */
-        main, header{
-            max-width: 960px;
-            margin: 30px auto;
-            padding: 0 10px;
-            color: #333;
-        }
-        .node circle {
-            fill: #999;
-        }
-
-        .node text {
-            font: 10px sans-serif;
-        }
-        .node--internal circle {
-            fill: #555;
-        }
-
-        .node--internal text {
-            text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
-        }
-
-        .link {
-            fill: none;
-            stroke: #555;
-            stroke-opacity: 0.4;
-            stroke-width: 1.5px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="style.css">
 <body>
-
-    <nav>
-        <ul>
-            <button class="button" onclick="getUserInfo()">Home</button>
-            <button class="button" onclick="getInfo()">Display Graph</button>
-        </ul>
-    </nav>
-    <header>
-        <h1>Software Engineer Github API Interrogator</h1>
-    </header>
-    <!-- <script type="text/javascript">
-        //  document.getElementById('str').innerHTML = str;
-    </script> -->
-    <pre id ="json"></pre>
-    
-   
-    
+        <nav>
+            <ul>
+                <button class="button" onclick="getUserInfo()">Home</button>
+                <button class="button" onclick="getInfo()">Display Graph</button>
+            </ul>
+        </nav>
+        <header>
+            <h1>Software Engineer Github API Interrogator</h1>
+        </header>
+     <svg width="960" height="5000"></svg>
+     <script src="frontend.js"></script>
+     <script src="//d3js.org/d3.v4.min.js"></script>
 </body>
-<svg width="1300" height="5000"></svg>
-<script src="frontend.js"></script>
-<script src="//d3js.org/d3.v4.min.js"></script>
+
 </html>

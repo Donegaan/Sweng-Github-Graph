@@ -1,0 +1,61 @@
+ /* Some Style code from https://github.com/iamshaunjp/oauth-playlist/blob/lesson-5/views/home.ejs  */
+
+
+.button{
+    color: #fff;
+    font-size: 18px;
+    background: rgba(255,255,255,0.2);
+    text-decoration: none;
+    padding: 10px;
+    display: inline;
+    border: none;
+}
+body{
+    font-family: arial;
+    margin: 0 auto;
+}
+nav{
+    background: #ff5353;
+    padding: 20px 10px;
+}
+nav ul{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+}
+nav li{
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
+main, header{
+    text-align: center;
+    margin:  auto;
+    padding: 0 10px;
+    color: #333;
+}
+.node circle {
+    fill: #ff5353;
+}
+
+.node text {
+    font: 12px sans-serif;
+}
+.node--internal circle {
+    fill: #ff5353;
+}
+
+.node--internal text {
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+svg {
+    display: block;
+    margin: 0 auto;
+}
+.link {
+    fill: none;
+    stroke: #555;
+    stroke-opacity: 0.4;
+    stroke-width: 1.5px;
+}
+

@@ -24,7 +24,7 @@ var port = process.env.PORT || 3000;
 
 
 
-function modifyJson(body){ // Make functions to modify JSON data to work for graph
+function modifyJson(body){
   var formatStr = 'Login: ' + body.login
   +'<br> ID: ' + body.id
   +'<br> URL: ' + body.url
@@ -34,7 +34,7 @@ function modifyJson(body){ // Make functions to modify JSON data to work for gra
   return formatStr;
 }
 
-function jsonFormat(data){
+function jsonFormat(data){  // Function to modify JSON data to work for graph
   //console.log(data);
   var keys= Object.keys(data[0]);
   //console.log(keys);
@@ -46,10 +46,12 @@ function jsonFormat(data){
     var tmp=data[i]; //JSON Data such as login
     //console.log(tmp);
     for (var j=0 ;j<keys.length;j++){
-      //console.log(keys[j]);
-      var tempdata = { id: 'facebook.'+keys[j]+'.'+tmp[keys[j]].toString().replace(/\./g, "*") , value : ((j*i)+j)};//Data for each key
-      //console.log(tempdata);
-      nodes.push(tempdata);
+      //console.log(tmp[keys[j]]);
+      if(tmp[keys[j]]!=null){
+        var tempdata = { id: 'facebook.'+keys[j]+'.'+tmp[keys[j]].toString().replace(/\./g, "*") , value : ((j*i)+j)};//Data for each key
+        //console.log(tempdata);
+        nodes.push(tempdata);
+      }
     }
   } 
   return nodes;
@@ -88,8 +90,6 @@ app.use(express.static('public'));
 app.listen(port, ()=>{
   console.log('Listening to port ' + port);
 });
-
-
 
 
 var data1 = [

@@ -24,21 +24,20 @@ function displayGraph(data){
     height = +svg.attr("height"),
     g = svg.append("g").attr("transform", "translate(40,0)");
 
-var tree = d3.cluster()
+    var tree = d3.cluster()
     .size([height, width - 400]);
 
-var stratify = d3.stratify()
-    .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+    var stratify = d3.stratify()
+        .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
-
-  var root = stratify(data)
+    var root = stratify(data)
       .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
 
-  tree(root);
+    tree(root);
 
-  var link = g.selectAll(".link")
+    var link = g.selectAll(".link")
       .data(root.descendants().slice(1))
-    .enter().append("path")
+        .enter().append("path")
       .attr("class", "link")
       .attr("d", function(d) {
         return "M" + d.y + "," + d.x
@@ -47,16 +46,16 @@ var stratify = d3.stratify()
             + " " + d.parent.y + "," + d.parent.x;
       });
 
-  var node = g.selectAll(".node")
+    var node = g.selectAll(".node")
       .data(root.descendants())
-    .enter().append("g")
+        .enter().append("g")
       .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
 
-  node.append("circle")
+    node.append("circle")
       .attr("r", 2.5);
 
-  node.append("text")
+    node.append("text")
       .attr("dy", 3)
       .attr("x", function(d) { return d.children ? -8 : 8; })
       .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
