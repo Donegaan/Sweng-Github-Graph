@@ -1,14 +1,41 @@
 
  function getUserInfo(){
-    fetch('/home.html')
-    .then(function(res){
-        return res.text();
-    }).then(function(str){
-        res.send(str);
-    });  
+  
+  var formatStr = "empty";  
+  var user = document.getElementById('gitUser').value; // Get username from textbox
+  fetch('/submit?users='+user)
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(json) {
+    var body = json;
+    console.log(body);
+    formatStr = '<br> Login: ' + body.login
+    +'<br> ID: ' + body.id
+    +'<br> URL: ' + body.url
+    +'<br> Type: ' + body.type
+    +'<br> Name: ' + body.name
+    +'<br> Public Repos: ' + body.public_repos;
+    var x = document.getElementById('user-data');
+    x.innerHTML=formatStr; 
+    x.style.display='block';
+  });
 }
 
+
+function homeClick(){ // Hide graph and show user name input
+  document.getElementById('graph').style.display='none';
+  document.getElementById('data-injection').style.display='block';
+}
+
+
 function getInfo(){
+  document.getElementById('data-injection').style.display='none';
+  document.getElementById('user-data').style.display='none';  
+  var x = document.getElementById('graph'); // To stop graph duplication
+  while(x.firstChild){
+    x.removeChild(x.firstChild);
+  }
     fetch('/displayGraph') // Fetch to get Facebook information
     .then(function(res) {
         return res.text();
@@ -16,6 +43,7 @@ function getInfo(){
         console.log(json);
         displayGraph(JSON.parse(json));
     });
+    document.getElementById('graph').style.display='block';
 }
 
 function displayGraph(data){

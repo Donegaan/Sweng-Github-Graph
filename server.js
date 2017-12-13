@@ -8,11 +8,6 @@ var fetch = require('node-fetch');
 var path = require('path');
 
 var client = github.client();
-// client.requestDefaults['proxy'] = 'https://myproxy.com:1085'// For the request library
-
-
-// var ghOrg = client.org('facebook');
-//ghOrg.info();
 
 // Create our Express application
 const app = express();
@@ -24,15 +19,6 @@ var port = process.env.PORT || 3000;
 
 
 
-function modifyJson(body){
-  var formatStr = 'Login: ' + body.login
-  +'<br> ID: ' + body.id
-  +'<br> URL: ' + body.url
-  +'<br> Type: ' + body.type
-  +'<br> Name: ' + body.name
-  +'<br> Public Repos: ' + body.public_repos;
-  return formatStr;
-}
 
 function jsonFormat(data){  // Function to modify JSON data to work for graph
   //console.log(data);
@@ -59,16 +45,17 @@ function jsonFormat(data){  // Function to modify JSON data to work for graph
 
 // http://localhost:3000/
 app.get('/', (req, res)=> {
-  res.redirect('/home.html');
+  res.sendfile('./public/home.html');
 });
 
-// app.get('/home.html', (req,res)=>{
-//   client.get('/users/donegaan', {}, function (err, status, body, headers) {
-//     //console.log(body);
-//     var str = modifyJson(body);
-//     res.send(str);
-//   });
-// });
+app.get('/submit', (req,res)=>{
+  var user= req.query.users;
+  //console.log(user);
+  client.get('/users/'+user, {}, function (err, status, body, headers) {
+    //console.log(body);
+    res.send(body);
+  });
+});
 
 var options ={
   url : 'https://api.github.com/orgs/facebook/members',
@@ -81,7 +68,7 @@ app.get('/displayGraph', (req, res)=> { // Display the JSON data through the gra
     var data = JSON.parse(body);
     data = JSON.stringify(jsonFormat(data));
     res.send(data);
-    //console.log(data);
+    console.log(data);
   });
 });
 
