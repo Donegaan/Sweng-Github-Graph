@@ -1,4 +1,8 @@
 
+$(document).ready(function(){
+  document.getElementById('graph-title').style.display='none'; // Hide the graph title at the start
+});
+
  function getUserInfo(){
   
   var formatStr = "empty";  
@@ -25,6 +29,7 @@
 
 function homeClick(){ // Hide graph and show user name input
   document.getElementById('graph').style.display='none';
+  document.getElementById('graph-title').style.display='none';
   document.getElementById('data-injection').style.display='block';
 }
 
@@ -43,6 +48,7 @@ function getInfo(){
         console.log(json);
         displayGraph(JSON.parse(json));
     });
+    document.getElementById('graph-title').style.display='block';
     document.getElementById('graph').style.display='block';
 }
 
