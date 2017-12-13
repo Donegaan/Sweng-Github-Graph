@@ -21,21 +21,15 @@ var port = process.env.PORT || 3000;
 
 
 function jsonFormat(data){  // Function to modify JSON data to work for graph
-  //console.log(data);
   var keys= Object.keys(data[0]);
-  //console.log(keys);
   var nodes=keys.map(k=>({id: 'facebook.'+k,value:""})); // Add facebook. to every key
-  //console.log(nodes);
   nodes.push({id:'facebook', values:""}); // Root
-  //console.log(nodes);
+
   for(var i=0;i<data.length;i++){
     var tmp=data[i]; //JSON Data such as login
-    //console.log(tmp);
     for (var j=0 ;j<keys.length;j++){
-      //console.log(tmp[keys[j]]);
       if(tmp[keys[j]]!=null){
         var tempdata = { id: 'facebook.'+keys[j]+'.'+tmp[keys[j]].toString().replace(/\./g, "*") , value : ((j*i)+j)};//Data for each key
-        //console.log(tempdata);
         nodes.push(tempdata);
       }
     }
@@ -50,9 +44,7 @@ app.get('/', (req, res)=> {
 
 app.get('/submit', (req,res)=>{
   var user= req.query.users;
-  //console.log(user);
   client.get('/users/'+user, {}, function (err, status, body, headers) {
-    //console.log(body);
     res.send(body);
   });
 });
@@ -68,7 +60,6 @@ app.get('/displayGraph', (req, res)=> { // Display the JSON data through the gra
     var data = JSON.parse(body);
     data = JSON.stringify(jsonFormat(data));
     res.send(data);
-    console.log(data);
   });
 });
 
@@ -78,25 +69,3 @@ app.listen(port, ()=>{
   console.log('Listening to port ' + port);
 });
 
-
-var data1 = [
-  {
-    "login": "aaronabramov",
-    "id": 940133,
-    "avatar_url": "https://avatars3.githubusercontent.com/u/940133?v=4",
-    "gravatar_id": "",
-    "url": "https://api.github.com/users/aaronabramov",
-    "html_url": "https://github.com/aaronabramov",
-    "followers_url": "https://api.github.com/users/aaronabramov/followers",
-    "following_url": "https://api.github.com/users/aaronabramov/following{/other_user}",
-    "gists_url": "https://api.github.com/users/aaronabramov/gists{/gist_id}",
-    "starred_url": "https://api.github.com/users/aaronabramov/starred{/owner}{/repo}",
-    "subscriptions_url": "https://api.github.com/users/aaronabramov/subscriptions",
-    "organizations_url": "https://api.github.com/users/aaronabramov/orgs",
-    "repos_url": "https://api.github.com/users/aaronabramov/repos",
-    "events_url": "https://api.github.com/users/aaronabramov/events{/privacy}",
-    "received_events_url": "https://api.github.com/users/aaronabramov/received_events",
-    "type": "User",
-    "site_admin": false
-  }
-]
