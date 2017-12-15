@@ -7,3 +7,5 @@ This is hosted at: http://sweng-github.herokuapp.com/
 
 The home page diplays some public data on a given user. (Github Api Assignment)
 The graph displays information on the Facebook organisation on github.
+
+I did not use a database, the api data gets sent directly to be displayed on the graph.

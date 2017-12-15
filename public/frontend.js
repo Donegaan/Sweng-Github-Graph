@@ -19,7 +19,11 @@ $(document).ready(function(){
     +'<br> URL: ' + body.url
     +'<br> Type: ' + body.type
     +'<br> Name: ' + body.name
-    +'<br> Public Repos: ' + body.public_repos;
+    +'<br> Public Repos: ' + body.public_repos
+    +'<br> Company: ' + body.company
+    +'<br> Location: ' + body.location
+    +'<br> Gists: ' + body.public_gists
+    +'<br> Followers: ' + body.followers;
     var x = document.getElementById('user-data');
     x.innerHTML=formatStr; 
     x.style.display='block';
@@ -52,7 +56,7 @@ function getInfo(){
     document.getElementById('graph').style.display='block';
 }
 
-function displayGraph(data){
+function displayGraph(data){ // D3 code for graph.
     var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height"),

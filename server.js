@@ -55,7 +55,6 @@ var options ={
 };
 
 app.get('/displayGraph', (req, res)=> { // Display the JSON data through the graph
-  //res.send(JSON.stringify(jsonFormat(data1)));
   request(options, function (error,response,body) {
     var data = JSON.parse(body);
     data = JSON.stringify(jsonFormat(data));
